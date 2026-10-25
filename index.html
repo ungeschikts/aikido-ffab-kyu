@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aïkido FFAB — Programme des Kyu (5e → 1er)</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Cinzel:wght@400;600&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1410;--paper:#f5f0e8;--red:#c0392b;--gold:#b8860b;--muted:#6b5e4e;--border:#d4c9b5;--card-bg:#faf7f2;--sw:#1a3a5c;--tw:#5c1a1a;--uw:#2d4a1a;--hh:#4a2d5c;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Source Sans 3',sans-serif;background:var(--paper);color:var(--ink);line-height:1.7;}
+
+/* ── HEADER ── */
+header{background:var(--ink);color:var(--paper);padding:2.2rem 2rem 0;text-align:center;position:relative;overflow:hidden;}
+header::before{content:'合気道';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Noto Serif JP',serif;font-size:12rem;color:rgba(255,255,255,.03);pointer-events:none;white-space:nowrap;}
+.hbadge{display:inline-block;border:1px solid var(--gold);color:var(--gold);font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.3em;padding:.25rem .9rem;margin-bottom:1rem;text-transform:uppercase;}
+header h1{font-family:'Cinzel',serif;font-size:clamp(1.5rem,3.5vw,2.6rem);font-weight:600;letter-spacing:.05em;margin-bottom:.3rem;}
+header .sub{color:rgba(245,240,232,.55);font-size:.82rem;letter-spacing:.08em;margin-bottom:1.5rem;}
+
+/* ── KYU TABS ── */
+.kyu-tabs{display:flex;justify-content:center;gap:0;border-top:1px solid rgba(255,255,255,.08);}
+.kyu-tab{flex:1;max-width:140px;padding:.9rem .5rem .7rem;cursor:pointer;text-align:center;border-bottom:3px solid transparent;transition:all .2s;position:relative;}
+.kyu-tab .num{font-family:'Noto Serif JP',serif;font-size:1.3rem;color:rgba(245,240,232,.3);transition:color .2s;display:block;}
+.kyu-tab .lbl{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.15em;color:rgba(245,240,232,.35);text-transform:uppercase;display:block;margin-top:.1rem;transition:color .2s;}
+.kyu-tab .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);margin:.4rem auto 0;opacity:0;transition:opacity .2s;}
+.kyu-tab:hover .num,.kyu-tab:hover .lbl{color:rgba(245,240,232,.7);}
+.kyu-tab.active{border-bottom-color:var(--gold);}
+.kyu-tab.active .num{color:var(--gold);}
+.kyu-tab.active .lbl{color:rgba(184,134,11,.8);}
+.kyu-tab.active .dot{opacity:1;}
+
+/* ── MAIN LAYOUT ── */
+main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+
+/* ── KYU PANELS ── */
+.kyu-panel{display:none;}
+.kyu-panel.active{display:block;}
+
+/* ── INTRO BAND ── */
+.intro-band{background:var(--ink);color:var(--paper);border-radius:4px;padding:1rem 1.5rem;margin-bottom:2rem;display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;}
+.intro-band .badge{font-family:'Cinzel',serif;font-size:.7rem;padding:.25rem .75rem;border-radius:2px;white-space:nowrap;letter-spacing:.1em;flex-shrink:0;}
+.badge-5{background:#3a5a7c;color:#fff;}
+.badge-4{background:#7c3a3a;color:#fff;}
+.badge-3{background:#4a5c3a;color:#fff;}
+.badge-2{background:#5c3a7c;color:#fff;}
+.badge-1{background:var(--gold);color:var(--ink);font-weight:700;}
+.intro-band p{font-size:.83rem;color:rgba(245,240,232,.75);}
+
+/* ── SECTION HEADERS ── */
+.sec-hd{display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:2px solid;}
+.sec-hd.sw{border-color:var(--sw);}.sec-hd.tw{border-color:var(--tw);}.sec-hd.uw{border-color:var(--uw);}.sec-hd.hh{border-color:var(--hh);}
+.sec-pill{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.18em;padding:.25rem .75rem;border-radius:2px;color:#fff;text-transform:uppercase;flex-shrink:0;}
+.sw .sec-pill{background:var(--sw);}.tw .sec-pill{background:var(--tw);}.uw .sec-pill{background:var(--uw);}.hh .sec-pill{background:var(--hh);}
+.sec-title{font-family:'Cinzel',serif;font-size:1.15rem;font-weight:600;}
+.sw .sec-title{color:var(--sw);}.tw .sec-title{color:var(--tw);}.uw .sec-title{color:var(--uw);}.hh .sec-title{color:var(--hh);}
+.sec-sub{font-size:.75rem;color:var(--muted);margin-left:auto;font-style:italic;}
+section{margin-bottom:2.5rem;}
+.atk-block{margin-bottom:1.5rem;}
+.atk-lbl{font-family:'Cinzel',serif;font-size:.78rem;font-weight:600;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-bottom:.7rem;padding-left:.7rem;border-left:3px solid var(--border);}
+.atk-lbl.gold-border{border-left-color:var(--gold);}
+
+/* ── CARDS ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:.9rem;}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:6px;padding:1.1rem 1.2rem;transition:box-shadow .2s,transform .2s;}
+.card:hover{box-shadow:0 4px 16px rgba(0,0,0,.09);transform:translateY(-2px);}
+.card-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem;margin-bottom:.7rem;}
+.tname{font-family:'Cinzel',serif;font-size:.95rem;font-weight:600;color:var(--ink);}
+.tjp{font-family:'Noto Serif JP',serif;font-size:.7rem;color:var(--gold);display:block;margin-top:.1rem;}
+.ctype{font-size:.6rem;padding:.15rem .5rem;border-radius:20px;font-weight:600;letter-spacing:.05em;white-space:nowrap;flex-shrink:0;}
+.tp{background:#e8f0e8;color:#2d5a2d;}
+.ti{background:#e8e8f0;color:#2d2d5a;}
+.tm{background:#f0e8e8;color:#5a2d2d;}
+.te{background:#f0ece0;color:#5a4a1a;}
+.tj{background:#f0f0e0;color:#4a4a10;}
+.cdesc{font-size:.82rem;color:var(--muted);margin-bottom:.9rem;line-height:1.6;}
+.cdesc strong{color:var(--ink);}
+
+/* ── VIDEO LINKS — vignettes ── */
+.vlinks{display:flex;flex-direction:column;gap:.45rem;}
+.vlink{display:flex;align-items:stretch;text-decoration:none;color:var(--ink);border:1px solid var(--border);border-radius:6px;overflow:hidden;background:#fff;transition:box-shadow .18s,transform .18s,border-color .18s;}
+.vlink:hover{box-shadow:0 4px 14px rgba(0,0,0,.1);transform:translateY(-1px);border-color:#c0b090;}
+.vthumb{position:relative;width:90px;flex-shrink:0;background:#111;overflow:hidden;}
+.vthumb img{width:100%;height:100%;object-fit:cover;display:block;opacity:.9;transition:opacity .18s;}
+.vlink:hover .vthumb img{opacity:1;}
+.vplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+.vplay-btn{width:28px;height:28px;background:rgba(192,57,43,.88);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.4);transition:transform .18s,background .18s;}
+.vlink:hover .vplay-btn{transform:scale(1.12);background:var(--red);}
+.vplay-btn svg{width:10px;height:10px;fill:#fff;margin-left:2px;}
+.vbody{flex:1;padding:.45rem .6rem;display:flex;flex-direction:column;justify-content:center;gap:.2rem;min-width:0;}
+.vbody-title{font-size:.74rem;font-weight:600;color:var(--ink);line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.vbody-meta{display:flex;align-items:center;gap:.35rem;flex-wrap:wrap;}
+.vbody-src{font-size:.64rem;color:var(--muted);}
+.vbody-badge{font-size:.56rem;background:rgba(184,134,11,.12);color:var(--gold);border:1px solid rgba(184,134,11,.25);padding:.06rem .3rem;border-radius:3px;font-weight:600;white-space:nowrap;}
+.vbody-arr{margin-left:auto;color:var(--muted);font-size:.72rem;flex-shrink:0;}
+
+/* ── TIP / CALLOUT ── */
+.tip{border-left:3px solid var(--gold);padding:.65rem .9rem;background:rgba(184,134,11,.06);border-radius:0 4px 4px 0;font-size:.8rem;color:var(--muted);margin-top:1.2rem;}
+.tip strong{color:var(--gold);}
+.shodan-box{background:linear-gradient(135deg,rgba(184,134,11,.12),rgba(184,134,11,.04));border:1px solid var(--gold);border-radius:6px;padding:1.2rem 1.5rem;margin:1.5rem 0;text-align:center;}
+.shodan-box .kj{font-family:'Noto Serif JP',serif;font-size:2.5rem;color:var(--gold);display:block;margin-bottom:.4rem;}
+.shodan-box p{font-size:.83rem;color:var(--muted);}
+.shodan-box strong{color:var(--gold);}
+
+/* ── LEXIQUE ── */
+.lexique{background:var(--ink);color:var(--paper);border-radius:6px;padding:1.5rem 1.8rem;margin-top:1.5rem;}
+.lexique h3{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.15em;color:var(--gold);margin-bottom:1rem;text-transform:uppercase;}
+.lex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.45rem 1.5rem;}
+.lxi{font-size:.8rem;display:flex;gap:.35rem;}
+.lxt{color:var(--gold);font-weight:600;flex-shrink:0;}
+.lxd{color:rgba(245,240,232,.65);}
+
+
+/* ── ACCORDÉON SECTIONS ── */
+.acc-section{margin-bottom:1.2rem;border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.acc-header{
+  display:flex;align-items:center;gap:.8rem;
+  padding:.75rem 1rem;cursor:pointer;
+  background:var(--card-bg);
+  border-bottom:2px solid transparent;
+  transition:background .15s;
+  position:relative;
+  user-select:none;
+}
+.acc-header:hover{background:#f0ebe0;}
+.acc-header.sw{border-bottom-color:var(--sw);}
+.acc-header.tw{border-bottom-color:var(--tw);}
+.acc-header.uw{border-bottom-color:var(--uw);}
+.acc-header.hh{border-bottom-color:var(--hh);}
+.acc-header.open{background:#f0ebe0;}
+.acc-pill{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.18em;padding:.2rem .65rem;border-radius:2px;color:#fff;text-transform:uppercase;flex-shrink:0;}
+.sw .acc-pill{background:var(--sw);}.tw .acc-pill{background:var(--tw);}
+.uw .acc-pill{background:var(--uw);}.hh .acc-pill{background:var(--hh);}
+.acc-title-wrap{flex:1;min-width:0;}
+.acc-title{font-family:'Cinzel',serif;font-size:1rem;font-weight:600;}
+.sw .acc-title{color:var(--sw);}.tw .acc-title{color:var(--tw);}
+.uw .acc-title{color:var(--uw);}.hh .acc-title{color:var(--hh);}
+.acc-sub{font-size:.72rem;color:var(--muted);font-style:italic;display:block;margin-top:.1rem;}
+.acc-anchor{
+  font-size:.62rem;color:var(--gold);text-decoration:none;
+  opacity:0;transition:opacity .15s;
+  padding:.15rem .35rem;border:1px solid rgba(184,134,11,.3);
+  border-radius:3px;flex-shrink:0;white-space:nowrap;
+}
+.acc-header:hover .acc-anchor{opacity:1;}
+.acc-anchor:hover{background:rgba(184,134,11,.08);}
+.acc-chevron{
+  width:20px;height:20px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--muted);transition:transform .25s;
+}
+.acc-header.open .acc-chevron{transform:rotate(180deg);}
+.acc-chevron svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;}
+.acc-body{
+  display:none;
+  padding:1.2rem 1rem 1rem;
+  background:var(--paper);
+}
+.acc-body.open{display:block;}
+
+/* Sous-sections (atk-block) repliables */
+.sub-acc{margin-bottom:1rem;border:1px solid var(--border);border-radius:5px;overflow:hidden;}
+.sub-acc-header{
+  display:flex;align-items:center;gap:.6rem;
+  padding:.55rem .8rem;cursor:pointer;
+  background:#f7f3ed;
+  transition:background .15s;
+  user-select:none;
+}
+.sub-acc-header:hover{background:#f0ebe0;}
+.sub-acc-header.open{background:#ede8df;}
+.sub-acc-lbl{
+  font-family:'Cinzel',serif;font-size:.72rem;font-weight:600;
+  letter-spacing:.08em;color:var(--muted);text-transform:uppercase;
+  flex:1;
+}
+.sub-acc-anchor{
+  font-size:.58rem;color:var(--gold);text-decoration:none;
+  opacity:0;transition:opacity .15s;
+  padding:.12rem .3rem;border:1px solid rgba(184,134,11,.3);border-radius:3px;
+  white-space:nowrap;
+}
+.sub-acc-header:hover .sub-acc-anchor{opacity:1;}
+.sub-acc-chevron{
+  width:16px;height:16px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--muted);transition:transform .2s;
+}
+.sub-acc-header.open .sub-acc-chevron{transform:rotate(180deg);}
+.sub-acc-chevron svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;}
+.sub-acc-body{display:none;padding:.8rem .8rem .8rem;background:var(--paper);}
+.sub-acc-body.open{display:block;}
+
+/* ── SOMMAIRE ── */
+.toc{
+  background:var(--ink);color:var(--paper);
+  border-radius:6px;padding:1.4rem 1.8rem;margin-bottom:2rem;
+}
+.toc-title{
+  font-family:'Cinzel',serif;font-size:.85rem;
+  letter-spacing:.2em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:1rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+.toc-title::after{content:'';flex:1;height:1px;background:rgba(184,134,11,.3);}
+.toc-kyu{margin-bottom:.8rem;}
+.toc-kyu-title{
+  font-family:'Cinzel',serif;font-size:.75rem;
+  color:rgba(245,240,232,.55);letter-spacing:.1em;
+  margin-bottom:.35rem;
+}
+.toc-links{display:flex;flex-wrap:wrap;gap:.3rem .5rem;}
+.toc-link{
+  font-size:.72rem;text-decoration:none;
+  padding:.2rem .55rem;border-radius:3px;
+  border:1px solid rgba(255,255,255,.1);
+  color:rgba(245,240,232,.7);
+  transition:all .15s;white-space:nowrap;
+}
+.toc-link:hover{color:var(--gold);border-color:rgba(184,134,11,.5);background:rgba(184,134,11,.08);}
+.toc-link .toc-tag{
+  font-size:.58rem;opacity:.6;margin-left:.25rem;
+}
+.toc-expand{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.68rem;color:rgba(184,134,11,.6);
+  cursor:pointer;margin-top:.5rem;background:none;border:none;
+  font-family:'Source Sans 3',sans-serif;
+  padding:.2rem .4rem;border-radius:3px;
+  transition:color .15s;
+}
+.toc-expand:hover{color:var(--gold);}
+
+footer{text-align:center;padding:1.3rem;font-size:.72rem;color:var(--muted);border-top:1px solid var(--border);}
+
+/* ── VIDEO ICON shorthand ── */
+.V{display:inline;}
+
+@media(max-width:640px){
+  .grid{grid-template-columns:1fr;}
+  .sec-sub{display:none;}
+  .kyu-tab{padding:.7rem .3rem .5rem;}
+  .kyu-tab .num{font-size:1.1rem;}
+  header::before{font-size:6rem;}
+  .intro-band{flex-direction:column;align-items:flex-start;gap:.6rem;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hbadge">FFAB · Aïkikaï de France</div>
+  <h1>Programme des Grades Kyu</h1>
+  <p class="sub">5e Kyu → 1er Kyu · Progression technique officielle FFAB</p>
+  <div class="kyu-tabs" id="kyuTabs">
+    <div class="kyu-tab active" data-panel="pS" onclick="showKyu('S')"><span class="num">目次</span><span class="lbl">Sommaire</span><span class="dot"></span></div>
+    <div class="kyu-tab" data-panel="p0" onclick="showKyu(0)"><span class="num">五</span><span class="lbl">5e Kyu</span><span class="dot"></span></div>
+    <div class="kyu-tab" data-panel="p1" onclick="showKyu(1)"><span class="num">四</span><span class="lbl">4e Kyu</span><span class="dot"></span></div>
+    <div class="kyu-tab" data-panel="p2" onclick="showKyu(2)"><span class="num">三</span><span class="lbl">3e Kyu</span><span class="dot"></span></div>
+    <div class="kyu-tab" data-panel="p3" onclick="showKyu(3)"><span class="num">二</span><span class="lbl">2e Kyu</span><span class="dot"></span></div>
+    <div class="kyu-tab" data-panel="p4" onclick="showKyu(4)"><span class="num">一</span><span class="lbl">1er Kyu</span><span class="dot"></span></div>
+  </div>
+</header>
+
+<main>
+
+<!-- ════════════════════════════════════════════
+     5e KYU
+════════════════════════════════════════════ -->
+<div class="kyu-panel active" id="pS">
+  <div class="toc" id="toc-container">
+    <div class="toc-title">📋 Sommaire</div>
+    <div id="toc"><!-- rempli par JS --></div>
+  </div>
+</div>
+
+<div class="kyu-panel" id="p0">
+  <div class="intro-band">
+    <span class="badge badge-5">5e KYU</span>
+    <p>Minimum 2 mois de pratique ou 20h. Techniques fondamentales en suwariwaza (à genoux) et tachiwaza (debout). La priorité est la <strong>fluidité du mouvement</strong>, pas la force.</p>
+  </div>
+
+  <!-- SUWARIWAZA -->
+  <div class="acc-section" id="5-sw-wrap"><div class="acc-header sw open" id="5-sw" onclick="toggleAcc('5-sw')">
+      <span class="acc-pill">座技</span>
+      <div class="acc-title-wrap">
+        <span class="acc-title">Suwariwaza</span>
+        <span class="acc-sub">Travail à genoux</span>
+      </div>
+      <a class="acc-anchor" href="#5-sw" onclick="copyAnchor('5-sw',event)" title="Copier le lien">⚓ #5-sw</a>
+      <span class="acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div>
+<div class="acc-body open" id="5-sw-body">
+
+    <div class="sub-acc" id="5-sw-ai-wrap"><div class="sub-acc-header open" id="5-sw-ai" onclick="toggleSubAcc('5-sw-ai')">
+      <span class="sub-acc-lbl">Aï Hanmi Katate Dori — Saisie du poignet, même garde</span>
+      <a class="sub-acc-anchor" href="#5-sw-ai" onclick="copyAnchor('5-sw-ai',event)" title="Copier le lien">⚓ #5-sw-ai</a>
+      <span class="sub-acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div><div class="sub-acc-body open" id="5-sw-ai-body"><div class="atk-block-inner">
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Ikkyo</div><span class="tjp">一教 — 1er principe</span></div><span class="ctype ti">Immobilisation</span></div>
+          <p class="cdesc">Mouvement circulaire du bras saisi <strong>vers le haut puis l'avant</strong>, main libre sur le coude. Guidage vers le bas depuis les hanches. Immobilisation au sol : coude + poignet contrôlés.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=VjGvrs7e2I8&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/VjGvrs7e2I8/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Suwari Waza – Ai Hanmi Katate Dori – Ikkyo</div><div class="vbody-meta"><span class="vbody-src">Dojo Satori Paris 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+            <a class="vlink" href="https://www.youtube.com/watch?v=Ad5Sp-wiou4&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/Ad5Sp-wiou4/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Suwari waza – Aï Hanmi Katate dori – Ikkyo</div><div class="vbody-meta"><span class="vbody-src">aikidopatrice.com 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Irimi Nage</div><span class="tjp">入身投げ — Projection par entrée</span></div><span class="ctype tp">Projection</span></div>
+          <p class="cdesc">Entrée franche <strong>en irimi</strong> dans l'espace d'uke. Bras libre passe derrière la nuque. Pivot et projection vers l'arrière. C'est le déplacement qui crée le déséquilibre.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=YcAotXibAfo&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/YcAotXibAfo/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Suwari waza – Aï Hanmi Katate dori – Irimi nage</div><div class="vbody-meta"><span class="vbody-src">aikidopatrice.com 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-acc" id="5-sw-sh-wrap"><div class="sub-acc-header open" id="5-sw-sh" onclick="toggleSubAcc('5-sw-sh')">
+      <span class="sub-acc-lbl">Shomen Uchi — Frappe verticale sur le crâne</span>
+      <a class="sub-acc-anchor" href="#5-sw-sh" onclick="copyAnchor('5-sw-sh',event)" title="Copier le lien">⚓ #5-sw-sh</a>
+      <span class="sub-acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div><div class="sub-acc-body open" id="5-sw-sh-body"><div class="atk-block-inner">
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Ikkyo</div><span class="tjp">一教 — interception + contrôle</span></div><span class="ctype ti">Immobilisation</span></div>
+          <p class="cdesc">Entrée irimi, lever les deux mains pour <strong>intercepter le bras frappant</strong>. Contrôle poignet + coude, rediriger vers le bas. Ne pas bloquer — accompagner.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=SuxYWAyaTow&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/SuxYWAyaTow/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Suwariwaza Shomen'uchi Ikkyo Omote waza</div><div class="vbody-meta"><span class="vbody-src">Aikido Virtual Dojo</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+            <a class="vlink" href="https://www.youtube.com/watch?v=WBajRTEtJ_k&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/WBajRTEtJ_k/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Suwariwaza Shomen'uchi Ikkyo Ura waza</div><div class="vbody-meta"><span class="vbody-src">Aikido Virtual Dojo</span><span class="vbody-badge">✨ 2023</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Irimi Nage</div><span class="tjp">入身投げ</span></div><span class="ctype tp">Projection</span></div>
+          <p class="cdesc">Entrée irimi <strong>sous le bras frappant</strong>, décalage sur le côté. Bras derrière la nuque d'uke, pivot et projection.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=y47aKlPC22A&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/y47aKlPC22A/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Comment se forme l'irimi nage sur shomen uchi</div><div class="vbody-meta"><span class="vbody-src">Analyse technique 🇫🇷</span><span class="vbody-badge">✨ 2023</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+            <a class="vlink" href="https://www.youtube.com/watch?v=v9xkRJy7FFQ&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/v9xkRJy7FFQ/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Suwari waza – Shomen uchi – Irimi nage</div><div class="vbody-meta"><span class="vbody-src">aikidopatrice.com 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-acc" id="5-sw-ry-wrap"><div class="sub-acc-header open" id="5-sw-ry" onclick="toggleSubAcc('5-sw-ry')">
+      <span class="sub-acc-lbl">Ryote Dori — Saisie des deux poignets</span>
+      <a class="sub-acc-anchor" href="#5-sw-ry" onclick="copyAnchor('5-sw-ry',event)" title="Copier le lien">⚓ #5-sw-ry</a>
+      <span class="sub-acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div><div class="sub-acc-body open" id="5-sw-ry-body"><div class="atk-block-inner">
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Kokyu Ho</div><span class="tjp">呼吸法 — Exercice de souffle</span></div><span class="ctype te">Exercice</span></div>
+          <p class="cdesc">Exercice fondamental de coordination corps-souffle. Ouvrir les hanches, <strong>lever les bras en rotation</strong> avec tout le corps. Développe le kokyu (force interne unifiée). Se pratique souvent en fin de cours.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=0gyGR88BoUc&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/0gyGR88BoUc/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Suwariwaza ryote-dori kokyu ho</div><div class="vbody-meta"><span class="vbody-src">Aikido Virtual Dojo</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div></div></div></div></div></div>
+
+  <!-- TACHIWAZA 5e -->
+  <div class="acc-section" id="5-tw-wrap"><div class="acc-header tw open" id="5-tw" onclick="toggleAcc('5-tw')">
+      <span class="acc-pill">立技</span>
+      <div class="acc-title-wrap">
+        <span class="acc-title">Tachiwaza</span>
+        <span class="acc-sub">Travail debout</span>
+      </div>
+      <a class="acc-anchor" href="#5-tw" onclick="copyAnchor('5-tw',event)" title="Copier le lien">⚓ #5-tw</a>
+      <span class="acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div>
+<div class="acc-body open" id="5-tw-body">
+
+    <div class="atk-block">
+      <p class="atk-lbl">Aï Hanmi Katate Dori (debout)</p>
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Ikkyo</div><span class="tjp">一教</span></div><span class="ctype ti">Immobilisation</span></div>
+          <p class="cdesc">Même principe qu'en suwariwaza, debout. Avancée du pied intérieur, guidage au sol. <strong>Immobilisation</strong> : tori à genoux, contrôle coude + poignet.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=kyoz5YAaNXM&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/kyoz5YAaNXM/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Tachi waza, Ai hanmi katate dori, Ikkyo</div><div class="vbody-meta"><span class="vbody-src">YouTube</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Shiho Nage</div><span class="tjp">四方投げ — 4 directions</span></div><span class="ctype tp">Projection</span></div>
+          <p class="cdesc">Saisir la main d'uke <strong>à deux mains</strong> (comme un sabre). Passer sous son bras en pivotant. Le pivot crée une torsion sur l'épaule → projection. Progressivité indispensable.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=DI5fjEtuCM0&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/DI5fjEtuCM0/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Tachi waza – Ai hanmi katate dori – Shiho nage</div><div class="vbody-meta"><span class="vbody-src">aikidopatrice.com 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Irimi Nage</div><span class="tjp">入身投げ</span></div><span class="ctype tp">Projection</span></div>
+          <p class="cdesc">Même principe qu'en suwariwaza, debout. L'entrée est plus ample, la projection plus dynamique.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=MhGvdF24Vgg&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/MhGvdF24Vgg/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Tachiwaza Ai Hanmi Katate Dori Irimi Nage Omote</div><div class="vbody-meta"><span class="vbody-src">G. Milliat Shihan 8e dan 🇫🇷</span><span class="vbody-badge">✨ 2025</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="atk-block">
+      <p class="atk-lbl">Gyaku Hanmi Katate Dori — Garde opposée</p>
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Tenchi Nage</div><span class="tjp">天地投げ — Ciel-Terre</span></div><span class="ctype tp">Projection</span></div>
+          <p class="cdesc">Grand pas irimi dans l'axe d'uke. Bras saisi descend vers la <strong>terre</strong>, bras libre monte vers le <strong>ciel</strong>. Les deux directions opposées + l'entrée projettent uke vers l'arrière.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=d9EdYRlV5ZA&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/d9EdYRlV5ZA/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Tachi waza – Katate Dori – Tenchi nage</div><div class="vbody-meta"><span class="vbody-src">aikidopatrice.com 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+            <a class="vlink" href="https://www.youtube.com/watch?v=lAQh9M_gz-E&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/lAQh9M_gz-E/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Katate Dori, Tenchi Nage, Omote & Ura (Kihon)</div><div class="vbody-meta"><span class="vbody-src">YouTube</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-acc" id="5-tw-sh-wrap"><div class="sub-acc-header open" id="5-tw-sh" onclick="toggleSubAcc('5-tw-sh')">
+      <span class="sub-acc-lbl">Shomen Uchi (debout)</span>
+      <a class="sub-acc-anchor" href="#5-tw-sh" onclick="copyAnchor('5-tw-sh',event)" title="Copier le lien">⚓ #5-tw-sh</a>
+      <span class="sub-acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div><div class="sub-acc-body open" id="5-tw-sh-body"><div class="atk-block-inner">
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Ikkyo</div><span class="tjp">一教</span></div><span class="ctype ti">Immobilisation</span></div>
+          <p class="cdesc">Interception du bras frappant, contrôle coude + poignet. <strong>Omote</strong> (entrée directe) et <strong>ura</strong> (pivot tenkan).</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=eAUiMpV57Jw&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/eAUiMpV57Jw/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Déclinaisons du principe d'ikkyo sur shomen uchi</div><div class="vbody-meta"><span class="vbody-src">Extraits de cours 🇫🇷</span><span class="vbody-badge">✨ 2024</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+            <a class="vlink" href="https://www.youtube.com/watch?v=Z40oWRArL1s&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/Z40oWRArL1s/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Shomen Uchi Ikkyo – Tachiwaza & Suwariwaza</div><div class="vbody-meta"><span class="vbody-src">Jason Hunt 3e dan Aikikai</span><span class="vbody-badge">✨ 2024</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Irimi Nage</div><span class="tjp">入身投げ</span></div><span class="ctype tp">Projection</span></div>
+          <p class="cdesc">Entrée sous le bras frappant, bras derrière la nuque, pivot et projection. Plus ample et dynamique debout.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=fPlArkVBT7k&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/fPlArkVBT7k/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Shomen Uchi Irimi Nage – Seki Shoji Sensei 8e dan</div><div class="vbody-meta"><span class="vbody-src">Séminaire Int. Aikikai</span><span class="vbody-badge">✨ 2026</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lexique">
+      <h3>Lexique essentiel</h3>
+      <div class="lex-grid">
+        <div class="lxi"><span class="lxt">Tori/Uke</span><span class="lxd">celui qui exécute / qui reçoit</span></div>
+        <div class="lxi"><span class="lxt">Omote/Ura</span><span class="lxd">entrée de face / par l'arrière</span></div>
+        <div class="lxi"><span class="lxt">Irimi</span><span class="lxd">entrée vers l'intérieur</span></div>
+        <div class="lxi"><span class="lxt">Tenkan</span><span class="lxd">pivot à 180°</span></div>
+        <div class="lxi"><span class="lxt">Ma-aï</span><span class="lxd">distance de sécurité</span></div>
+        <div class="lxi"><span class="lxt">Kokyu</span><span class="lxd">respiration, souffle interne</span></div>
+        <div class="lxi"><span class="lxt">Hanmi</span><span class="lxd">garde de face (pied avancé)</span></div>
+        <div class="lxi"><span class="lxt">Zanshin</span><span class="lxd">vigilance après la technique</span></div>
+      </div>
+    </div>
+  </div></div></div></div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     4e KYU
+════════════════════════════════════════════ -->
+<div class="kyu-panel" id="p1">
+  <div class="intro-band">
+    <span class="badge badge-4">4e KYU</span>
+    <p>Minimum 3 mois après le 5e kyu · 60h. Apparition de <strong>nikyo, sankyo, yonkyo</strong>, du <strong>kote gaeshi</strong>, du <strong>koshi nage</strong>, des <strong>kaiten nage</strong> et des premières techniques sur attaque arrière.</p>
+  </div>
+<div style="display:flex;gap:.5rem;margin-bottom:1rem;justify-content:flex-end;">
+      <button class="toc-expand" onclick="expandAll(0)">▼ Tout ouvrir</button>
+      <button class="toc-expand" onclick="collapseAll(0)">▲ Tout fermer</button>
+    </div>
+
+  <div class="acc-section" id="4-sw-wrap"><div class="acc-header sw open" id="4-sw" onclick="toggleAcc('4-sw')">
+      <span class="acc-pill">座技</span>
+      <div class="acc-title-wrap">
+        <span class="acc-title">Suwariwaza</span>
+        <span class="acc-sub">Travail à genoux</span>
+      </div>
+      <a class="acc-anchor" href="#4-sw" onclick="copyAnchor('4-sw',event)" title="Copier le lien">⚓ #4-sw</a>
+      <span class="acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div>
+<div class="acc-body open" id="4-sw-body">
+
+    <div class="sub-acc" id="4-sw-ai-wrap"><div class="sub-acc-header open" id="4-sw-ai" onclick="toggleSubAcc('4-sw-ai')">
+      <span class="sub-acc-lbl">Aï Hanmi Katate Dori — Saisie du poignet, même garde</span>
+      <a class="sub-acc-anchor" href="#4-sw-ai" onclick="copyAnchor('4-sw-ai',event)" title="Copier le lien">⚓ #4-sw-ai</a>
+      <span class="sub-acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div><div class="sub-acc-body open" id="4-sw-ai-body"><div class="atk-block-inner">
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Nikyo</div><span class="tjp">二教 — clé de poignet interne</span></div><span class="ctype ti">Immobilisation</span></div>
+          <p class="cdesc">Depuis ikkyo, <strong>enroulement de la main d'uke</strong> en clé de poignet interne (rotation). Torsion combinée poignet + coude + épaule. Omote et ura.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=lDWYrUUbSVs&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/lDWYrUUbSVs/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Suwari waza – Ikkyo, Nikyo, Sankyo, Yonkyo, Gokyo</div><div class="vbody-meta"><span class="vbody-src">Marc Bachraty 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+            <a class="vlink" href="https://www.youtube.com/watch?v=gvp2fczdSjU&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/gvp2fczdSjU/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Suwariwaza Aihanmi Katate dori – Nikyo</div><div class="vbody-meta"><span class="vbody-src">YouTube</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Sankyo</div><span class="tjp">三教 — clé en vrille</span></div><span class="ctype ti">Immobilisation</span></div>
+          <p class="cdesc">Depuis ikkyo, saisie du <strong>tranchant de la main d'uke</strong>, mouvement en vrille vers le haut (rotation externe). Poignet, coude et épaule sollicités en spirale.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=lDWYrUUbSVs&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/lDWYrUUbSVs/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Suwari waza – Ikkyo, Nikyo, Sankyo, Yonkyo, Gokyo</div><div class="vbody-meta"><span class="vbody-src">Marc Bachraty 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Yonkyo</div><span class="tjp">四教 — pression nerf radial</span></div><span class="ctype ti">Immobilisation</span></div>
+          <p class="cdesc">Pression de la <strong>première phalange de l'index</strong> sur le nerf radial de l'avant-bras. Mouvement de sabre vers le bas. La précision du point est tout — pas la force.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=CaYc6eNFLsU&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/CaYc6eNFLsU/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Ikkyo → Nikyo → Sankyo → Yonkyo – série complète</div><div class="vbody-meta"><span class="vbody-src">Jason Hunt Sensei</span><span class="vbody-badge">✨ 2024</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-acc" id="4-sw-ka-wrap"><div class="sub-acc-header open" id="4-sw-ka" onclick="toggleSubAcc('4-sw-ka')">
+      <span class="sub-acc-lbl">Kata Dori — Saisie de l'épaule</span>
+      <a class="sub-acc-anchor" href="#4-sw-ka" onclick="copyAnchor('4-sw-ka',event)" title="Copier le lien">⚓ #4-sw-ka</a>
+      <span class="sub-acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div><div class="sub-acc-body open" id="4-sw-ka-body"><div class="atk-block-inner">
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Ikkyo · Nikyo</div><span class="tjp">肩取り</span></div><span class="ctype tm">Immobilisations</span></div>
+          <p class="cdesc">Uke saisit l'épaule. Tori <strong>libère en levant le bras</strong> et contrôle coude + poignet pour ikkyo, puis enchaîne nikyo. La libération de l'épaule est le déclencheur de tout.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=gvp2fczdSjU&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/gvp2fczdSjU/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Suwariwaza Aihanmi Katate dori – Nikyo</div><div class="vbody-meta"><span class="vbody-src">YouTube</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-acc" id="4-sw-sh-wrap"><div class="sub-acc-header open" id="4-sw-sh" onclick="toggleSubAcc('4-sw-sh')">
+      <span class="sub-acc-lbl">Shomen Uchi — Frappe verticale sur le crâne</span>
+      <a class="sub-acc-anchor" href="#4-sw-sh" onclick="copyAnchor('4-sw-sh',event)" title="Copier le lien">⚓ #4-sw-sh</a>
+      <span class="sub-acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div><div class="sub-acc-body open" id="4-sw-sh-body"><div class="atk-block-inner">
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Nikyo · Kote Gaeshi</div><span class="tjp">正面打ち</span></div><span class="ctype tm">Immob. & Projection</span></div>
+          <p class="cdesc"><strong>Nikyo</strong> depuis l'intercept shomen. <strong>Kote gaeshi</strong> : petit cercle enroulant le poignet vers l'extérieur après l'interception — projection rapide et dynamique.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=eAUiMpV57Jw&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/eAUiMpV57Jw/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Déclinaisons du principe d'ikkyo sur shomen uchi</div><div class="vbody-meta"><span class="vbody-src">Extraits de cours 🇫🇷</span><span class="vbody-badge">✨ 2024</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div></div></div></div></div></div>
+
+  <div class="acc-section" id="4-tw-wrap"><div class="acc-header tw open" id="4-tw" onclick="toggleAcc('4-tw')">
+      <span class="acc-pill">立技</span>
+      <div class="acc-title-wrap">
+        <span class="acc-title">Tachiwaza</span>
+        <span class="acc-sub">Travail debout</span>
+      </div>
+      <a class="acc-anchor" href="#4-tw" onclick="copyAnchor('4-tw',event)" title="Copier le lien">⚓ #4-tw</a>
+      <span class="acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div>
+<div class="acc-body open" id="4-tw-body">
+
+    <div class="sub-acc" id="5-tw-ai-wrap"><div class="sub-acc-header open" id="5-tw-ai" onclick="toggleSubAcc('5-tw-ai')">
+      <span class="sub-acc-lbl">Aï Hanmi Katate Dori — Saisie du poignet, même garde (debout)</span>
+      <a class="sub-acc-anchor" href="#5-tw-ai" onclick="copyAnchor('5-tw-ai',event)" title="Copier le lien">⚓ #5-tw-ai</a>
+      <span class="sub-acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div><div class="sub-acc-body open" id="5-tw-ai-body"><div class="atk-block-inner">
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Nikyo · Sankyo · Yonkyo</div><span class="tjp">二・三・四教</span></div><span class="ctype tm">Immobilisations</span></div>
+          <p class="cdesc">Les 3 principes debout. Déplacements plus amples qu'en suwariwaza. Toujours depuis la base ikkyo.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=CaYc6eNFLsU&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/CaYc6eNFLsU/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Ikkyo → Nikyo → Sankyo → Yonkyo – série complète</div><div class="vbody-meta"><span class="vbody-src">Jason Hunt Sensei</span><span class="vbody-badge">✨ 2024</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Udekime Nage · Kote Gaeshi · Koshi Nage</div><span class="tjp">腕極投・小手返・腰投</span></div><span class="ctype tm">Projections</span></div>
+          <p class="cdesc"><strong>Udekime nage</strong> : arm-lock du coude en extension. <strong>Kote gaeshi</strong> : retournement du poignet. <strong>Koshi nage</strong> : projection de hanches — tori entre sous uke, hanches basses, projette en se redressant.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=IkG0ue8bXTo&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/IkG0ue8bXTo/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Tachi waza – Koshi nage</div><div class="vbody-meta"><span class="vbody-src">YouTube</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-acc" id="5-tw-gy-wrap"><div class="sub-acc-header open" id="5-tw-gy" onclick="toggleSubAcc('5-tw-gy')">
+      <span class="sub-acc-lbl">Gyaku Hanmi Katate Dori — Saisie du poignet, garde opposée</span>
+      <a class="sub-acc-anchor" href="#5-tw-gy" onclick="copyAnchor('5-tw-gy',event)" title="Copier le lien">⚓ #5-tw-gy</a>
+      <span class="sub-acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div><div class="sub-acc-body open" id="5-tw-gy-body"><div class="atk-block-inner">
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Ikkyo · Nikyo · Shiho Nage · Udekime Nage · Kote Gaeshi · Irimi Nage · Uchi & Soto Kaiten Nage</div><span class="tjp">逆半身 — programme complet</span></div><span class="ctype tm">Programme</span></div>
+          <p class="cdesc">La garde opposée enrichit considérablement les possibilités. <strong>Uchi kaiten nage</strong> : entrée intérieure + rotation. <strong>Soto kaiten nage</strong> : pivot extérieur. Ces projections rotatoires sont nouvelles à ce grade.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=bDU5bkIlIqs&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/bDU5bkIlIqs/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Gyaku hanmi – Irimi nage (analyse)</div><div class="vbody-meta"><span class="vbody-src">Analyse technique 🇫🇷</span><span class="vbody-badge">✨ 2023</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+            <a class="vlink" href="https://www.youtube.com/watch?v=lAO-hJW6EsI&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/lAO-hJW6EsI/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Uchi kaiten nage</div><div class="vbody-meta"><span class="vbody-src">YouTube</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-acc" id="4-tw-mult-wrap"><div class="sub-acc-header open" id="4-tw-mult" onclick="toggleSubAcc('4-tw-mult')">
+      <span class="sub-acc-lbl">Shomen Uchi (frappe verticale) · Kata Dori (saisie épaule) · Yokomen Uchi (frappe latérale)</span>
+      <a class="sub-acc-anchor" href="#4-tw-mult" onclick="copyAnchor('4-tw-mult',event)" title="Copier le lien">⚓ #4-tw-mult</a>
+      <span class="sub-acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div><div class="sub-acc-body open" id="4-tw-mult-body"><div class="atk-block-inner">
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Shomen Uchi — Nikyo · Sankyo (kaiten) · Yonkyo · Kote Gaeshi</div><span class="tjp">正面打ち</span></div><span class="ctype tm">Programme</span></div>
+          <p class="cdesc">Sankyo décliné en <strong>uchi kaiten</strong> (rotation intérieure) et <strong>soto kaiten</strong> (rotation extérieure).</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=fPlArkVBT7k&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/fPlArkVBT7k/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Shomen Uchi Irimi Nage – Seki Shoji Sensei 8e dan</div><div class="vbody-meta"><span class="vbody-src">Séminaire Int. Aikikai</span><span class="vbody-badge">✨ 2026</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Yokomen Uchi — Shiho Nage · Udekime Nage · Kokyu Nage</div><span class="tjp">横面打ち</span></div><span class="ctype tm">Programme</span></div>
+          <p class="cdesc">Première apparition du yokomen uchi. L'interception de la frappe latérale est l'un des gestes les plus délicats — l'angle d'entrée est crucial.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=9nt0R4jGNYw&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/9nt0R4jGNYw/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Shomen / Yokomen uchi – toutes techniques</div><div class="vbody-meta"><span class="vbody-src">YouTube</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div></div>
+
+  <div class="acc-section" id="4-uw-wrap"><div class="acc-header uw open" id="4-uw" onclick="toggleAcc('4-uw')">
+      <span class="acc-pill">後技</span>
+      <div class="acc-title-wrap">
+        <span class="acc-title">Ushiro Waza</span>
+        <span class="acc-sub">Attaque arrière</span>
+      </div>
+      <a class="acc-anchor" href="#4-uw" onclick="copyAnchor('4-uw',event)" title="Copier le lien">⚓ #4-uw</a>
+      <span class="acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div>
+<div class="acc-body open" id="4-uw-body">
+    <div class="sub-acc" id="4-uw-ku-wrap"><div class="sub-acc-header open" id="4-uw-ku" onclick="toggleSubAcc('4-uw-ku')">
+      <span class="sub-acc-lbl">Katate Dori Kubishime — Saisie poignet + étranglement par derrière</span>
+      <a class="sub-acc-anchor" href="#4-uw-ku" onclick="copyAnchor('4-uw-ku',event)" title="Copier le lien">⚓ #4-uw-ku</a>
+      <span class="sub-acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div><div class="sub-acc-body open" id="4-uw-ku-body"><div class="atk-block-inner">
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Ikkyo · Irimi Nage</div><span class="tjp">片手取り首絞め</span></div><span class="ctype tm">Immob. & Projection</span></div>
+          <p class="cdesc">Anticiper l'étranglement, <strong>rester centré, conserver les mains devant soi</strong>. Sortie en ikkyo ou pivot rapide vers uke pour irimi nage. Ne jamais reculer.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=lDWYrUUbSVs&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/lDWYrUUbSVs/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Suwari waza – Ikkyo, Nikyo, Sankyo, Yonkyo, Gokyo</div><div class="vbody-meta"><span class="vbody-src">Marc Bachraty 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tip"><strong>Ushiro waza — règle absolue</strong> : Ne jamais reculer. Toujours avancer vers uke ou pivoter. Conserver les mains devant soi et le regard périphérique.</div>
+  </div></div></div></div>
+
+  <div class="lexique">
+    <h3>Nouvelles techniques du 4e kyu</h3>
+    <div class="lex-grid">
+      <div class="lxi"><span class="lxt">Nikyo</span><span class="lxd">clé de poignet interne</span></div>
+      <div class="lxi"><span class="lxt">Sankyo</span><span class="lxd">clé en vrille externe</span></div>
+      <div class="lxi"><span class="lxt">Yonkyo</span><span class="lxd">pression nerf radial</span></div>
+      <div class="lxi"><span class="lxt">Kote Gaeshi</span><span class="lxd">retournement du poignet</span></div>
+      <div class="lxi"><span class="lxt">Koshi Nage</span><span class="lxd">projection de hanches</span></div>
+      <div class="lxi"><span class="lxt">Udekime Nage</span><span class="lxd">arm-lock coude en extension</span></div>
+      <div class="lxi"><span class="lxt">Uchi Kaiten Nage</span><span class="lxd">projection rotatoire intérieure</span></div>
+      <div class="lxi"><span class="lxt">Soto Kaiten Nage</span><span class="lxd">projection rotatoire extérieure</span></div>
+      <div class="lxi"><span class="lxt">Yokomen Uchi</span><span class="lxd">frappe latérale à la tempe</span></div>
+      <div class="lxi"><span class="lxt">Kata Dori</span><span class="lxd">saisie de l'épaule</span></div>
+      <div class="lxi"><span class="lxt">Kubishime</span><span class="lxd">étranglement par le revers</span></div>
+      <div class="lxi"><span class="lxt">Kokyu Nage</span><span class="lxd">projection par le souffle</span></div>
+    </div>
+  </div>
+</div></div></div></div></div>
+
+<!-- ════════════════════════════════════════════
+     3e KYU
+════════════════════════════════════════════ -->
+<div class="kyu-panel" id="p2">
+  <div class="intro-band">
+    <span class="badge badge-3">3e KYU</span>
+    <p>Minimum 6 mois après le 4e kyu · 120h. Introduction du <strong>Hanmi Handachi Waza</strong>, du <strong>chudan tsuki</strong> (coup de poing), du <strong>gokyo</strong> (5e principe) et du <strong>kata dori menuchi</strong>.</p>
+  </div>
+<div style="display:flex;gap:.5rem;margin-bottom:1rem;justify-content:flex-end;">
+      <button class="toc-expand" onclick="expandAll(1)">▼ Tout ouvrir</button>
+      <button class="toc-expand" onclick="collapseAll(1)">▲ Tout fermer</button>
+    </div>
+
+  <div class="acc-section" id="3-hh-wrap"><div class="acc-header hh open" id="3-hh" onclick="toggleAcc('3-hh')">
+      <span class="acc-pill">半立技</span>
+      <div class="acc-title-wrap">
+        <span class="acc-title">Hanmi Handachi Waza</span>
+        <span class="acc-sub">Tori à genoux · Uke debout</span>
+      </div>
+      <a class="acc-anchor" href="#3-hh" onclick="copyAnchor('3-hh',event)" title="Copier le lien">⚓ #3-hh</a>
+      <span class="acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div>
+<div class="acc-body open" id="3-hh-body">
+    <div class="sub-acc" id="3-hh-gy-wrap"><div class="sub-acc-header open" id="3-hh-gy" onclick="toggleSubAcc('3-hh-gy')">
+      <span class="sub-acc-lbl">Gyaku Hanmi Katate Dori — Saisie du poignet garde opposée · Ikkyo · Shiho Nage</span>
+      <a class="sub-acc-anchor" href="#3-hh-gy" onclick="copyAnchor('3-hh-gy',event)" title="Copier le lien">⚓ #3-hh-gy</a>
+      <span class="sub-acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div><div class="sub-acc-body open" id="3-hh-gy-body"><div class="atk-block-inner">
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Ikkyo · Shiho Nage</div><span class="tjp">半立技 — nouvelle position</span></div><span class="ctype tm">Immob. & Projection</span></div>
+          <p class="cdesc">Position unique : tori à genoux, uke debout. Le <strong>différentiel de hauteur</strong> oblige tori à générer de la puissance depuis les genoux. Maîtrise du shikko (marche à genoux) indispensable.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=asfC7cy5KIs&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/asfC7cy5KIs/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Hanmi Handachi – Gyaku Hanmi Katate Dori – Ikkyo Omote</div><div class="vbody-meta"><span class="vbody-src">Aikido Shugyosha 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+            <a class="vlink" href="https://www.youtube.com/watch?v=lQo7By6PhD8&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/lQo7By6PhD8/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Hanmi Handachi – Gyaku Hanmi – Shiho Nage Omote</div><div class="vbody-meta"><span class="vbody-src">Aikido Shugyosha 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+            <a class="vlink" href="https://www.youtube.com/watch?v=xIaRVeaPTGE&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/xIaRVeaPTGE/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Hanmi Handachi – Ikkyo, Irimi Nage, Shiho Nage (FFAB)</div><div class="vbody-meta"><span class="vbody-src">David Maurel – Ligue IDF FFAB 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div></div>
+
+  <div class="acc-section" id="3-tw-wrap"><div class="acc-header tw open" id="3-tw" onclick="toggleAcc('3-tw')">
+      <span class="acc-pill">立技</span>
+      <div class="acc-title-wrap">
+        <span class="acc-title">Tachiwaza</span>
+        <span class="acc-sub">Nouvelles attaques</span>
+      </div>
+      <a class="acc-anchor" href="#3-tw" onclick="copyAnchor('3-tw',event)" title="Copier le lien">⚓ #3-tw</a>
+      <span class="acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div>
+<div class="acc-body open" id="3-tw-body">
+    <div class="sub-acc" id="3-tw-ry-wrap"><div class="sub-acc-header open" id="3-tw-ry" onclick="toggleSubAcc('3-tw-ry')">
+      <span class="sub-acc-lbl">Ryote Dori — Saisie des deux poignets · Tenchi Nage · Kokyu Nage · Koshi Nage</span>
+      <a class="sub-acc-anchor" href="#3-tw-ry" onclick="copyAnchor('3-tw-ry',event)" title="Copier le lien">⚓ #3-tw-ry</a>
+      <span class="sub-acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div><div class="sub-acc-body open" id="3-tw-ry-body"><div class="atk-block-inner">
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Tenchi Nage · Kokyu Nage · Koshi Nage</div><span class="tjp">両手取り</span></div><span class="ctype tm">Projections</span></div>
+          <p class="cdesc">Sur double saisie des poignets : <strong>tenchi nage</strong> (ciel-terre), <strong>kokyu nage</strong> (projection par le souffle), <strong>koshi nage</strong> (hanches sous le centre de gravité d'uke).</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=d9EdYRlV5ZA&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/d9EdYRlV5ZA/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Tachi waza – Katate Dori – Tenchi nage</div><div class="vbody-meta"><span class="vbody-src">aikidopatrice.com 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sub-acc" id="3-tw-ch-wrap"><div class="sub-acc-header open" id="3-tw-ch" onclick="toggleSubAcc('3-tw-ch')">
+      <span class="sub-acc-lbl">Chudan Tsuki — Coup de poing au plexus</span>
+      <a class="sub-acc-anchor" href="#3-tw-ch" onclick="copyAnchor('3-tw-ch',event)" title="Copier le lien">⚓ #3-tw-ch</a>
+      <span class="sub-acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div><div class="sub-acc-body open" id="3-tw-ch-body"><div class="atk-block-inner">
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Ikkyo · Kote Gaeshi · Irimi Nage · Uchi & Soto Kaiten Nage</div><span class="tjp">中段突き</span></div><span class="ctype tm">Programme</span></div>
+          <p class="cdesc">Déviation latérale du coup (jamais de bloc frontal), puis technique. <strong>Uchi/soto kaiten nage</strong> : exploiter l'élan du coup pour faire pivoter uke.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=MsoAFo24EJE&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/MsoAFo24EJE/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Irimi Nage, Ikkyo, Kote Gaeshi sur attaque</div><div class="vbody-meta"><span class="vbody-src">Marc Bachraty 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sub-acc" id="3-tw-yo-wrap"><div class="sub-acc-header open" id="3-tw-yo" onclick="toggleSubAcc('3-tw-yo')">
+      <span class="sub-acc-lbl">Yokomen Uchi — Frappe latérale à la tempe · Les 5 principes + Kote Gaeshi + Irimi Nage</span>
+      <a class="sub-acc-anchor" href="#3-tw-yo" onclick="copyAnchor('3-tw-yo',event)" title="Copier le lien">⚓ #3-tw-yo</a>
+      <span class="sub-acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div><div class="sub-acc-body open" id="3-tw-yo-body"><div class="atk-block-inner">
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Ikkyo → Gokyo · Kote Gaeshi · Irimi Nage</div><span class="tjp">横面打ち — programme complet</span></div><span class="ctype tm">Programme</span></div>
+          <p class="cdesc"><strong>Gokyo</strong> (5e principe) : même structure qu'ikkyo ura mais paume d'uke tournée vers le haut — technique conçue pour le désarmement couteau.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=H6Fez4hUNeo&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/H6Fez4hUNeo/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Suwari Waza – Yokomen Uchi – Ikkyo, Nikyo, Sankyo (FFAB)</div><div class="vbody-meta"><span class="vbody-src">David Maurel FFAB 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+            <a class="vlink" href="https://www.youtube.com/playlist?list=PLjHB3AKfmkUCRgU2pDJQ09mPZKucbwuHs" target="_blank" rel="noopener">
+              <div class="vthumb" style="background:#222;display:flex;align-items:center;justify-content:center;"><div class="vplay-btn" style="position:static;"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+              <div class="vbody"><div class="vbody-title">Yokomen Uchi – toutes techniques (playlist)</div><div class="vbody-meta"><span class="vbody-src">Aikido Shugyosha 🇫🇷</span><span class="vbody-badge">▶ Playlist</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sub-acc" id="3-tw-ka-wrap"><div class="sub-acc-header open" id="3-tw-ka" onclick="toggleSubAcc('3-tw-ka')">
+      <span class="sub-acc-lbl">Kata Dori Menuchi (saisie épaule + frappe) · Katate Ryote Dori (poignet saisi à deux mains)</span>
+      <a class="sub-acc-anchor" href="#3-tw-ka" onclick="copyAnchor('3-tw-ka',event)" title="Copier le lien">⚓ #3-tw-ka</a>
+      <span class="sub-acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div><div class="sub-acc-body open" id="3-tw-ka-body"><div class="atk-block-inner">
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Kata Dori Menuchi — Ikkyo · Nikyo</div><span class="tjp">肩取り面打ち</span></div><span class="ctype tm">Attaque combinée</span></div>
+          <p class="cdesc">Saisie épaule + frappe shomen <strong>simultanées</strong>. Neutraliser la frappe en premier, puis libérer l'épaule et enchaîner. La coordination est la principale difficulté.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=9nt0R4jGNYw&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/9nt0R4jGNYw/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Shomen / Yokomen uchi – toutes techniques</div><div class="vbody-meta"><span class="vbody-src">YouTube</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Katate Ryote Dori — Ikkyo · Nikyo · Kokyu Nage</div><span class="tjp">片手両手取り — morote dori</span></div><span class="ctype tm">Un poignet à deux mains</span></div>
+          <p class="cdesc">Uke saisit un poignet à deux mains. Tori utilise son <strong>bras libre et ses hanches</strong> pour créer le déséquilibre avant d'appliquer la technique.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=j88tisxQTE4&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/j88tisxQTE4/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Katate dori / Ryote dori – Kokyu nage</div><div class="vbody-meta"><span class="vbody-src">Marc Bachraty 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div></div></div></div></div></div></div></div>
+
+  <div class="acc-section" id="3-uw-wrap"><div class="acc-header uw open" id="3-uw" onclick="toggleAcc('3-uw')">
+      <span class="acc-pill">後技</span>
+      <div class="acc-title-wrap">
+        <span class="acc-title">Ushiro Waza</span>
+        <span class="acc-sub">Ryote Dori</span>
+      </div>
+      <a class="acc-anchor" href="#3-uw" onclick="copyAnchor('3-uw',event)" title="Copier le lien">⚓ #3-uw</a>
+      <span class="acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div>
+<div class="acc-body open" id="3-uw-body">
+    <div class="sub-acc" id="3-uw-ry-wrap"><div class="sub-acc-header open" id="3-uw-ry" onclick="toggleSubAcc('3-uw-ry')">
+      <span class="sub-acc-lbl">Ushiro Ryote Dori — Saisie des deux poignets par derrière · Ikkyo · Kote Gaeshi · Irimi Nage</span>
+      <a class="sub-acc-anchor" href="#3-uw-ry" onclick="copyAnchor('3-uw-ry',event)" title="Copier le lien">⚓ #3-uw-ry</a>
+      <span class="sub-acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div><div class="sub-acc-body open" id="3-uw-ry-body"><div class="atk-block-inner">
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Ikkyo · Kote Gaeshi · Irimi Nage</div><span class="tjp">後両手取り</span></div><span class="ctype tm">Programme</span></div>
+          <p class="cdesc">Les deux poignets saisis par derrière. Libérer un poignet en avançant vers l'avant, puis pivoter vers uke. Ne jamais tirer en arrière — toujours aller vers l'avant d'abord.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=bDU5bkIlIqs&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/bDU5bkIlIqs/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Gyaku hanmi – Irimi nage (analyse)</div><div class="vbody-meta"><span class="vbody-src">Analyse technique 🇫🇷</span><span class="vbody-badge">✨ 2023</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div></div>
+
+  <div class="lexique">
+    <h3>Nouvelles techniques du 3e kyu</h3>
+    <div class="lex-grid">
+      <div class="lxi"><span class="lxt">Hanmi Handachi</span><span class="lxd">tori à genoux, uke debout</span></div>
+      <div class="lxi"><span class="lxt">Chudan Tsuki</span><span class="lxd">coup de poing au plexus</span></div>
+      <div class="lxi"><span class="lxt">Gokyo</span><span class="lxd">5e principe — désarmement couteau</span></div>
+      <div class="lxi"><span class="lxt">Kata Dori Menuchi</span><span class="lxd">saisie épaule + frappe simultanée</span></div>
+      <div class="lxi"><span class="lxt">Katate Ryote Dori</span><span class="lxd">un poignet saisi à deux mains</span></div>
+      <div class="lxi"><span class="lxt">Ushiro Ryote Dori</span><span class="lxd">saisie deux poignets par derrière</span></div>
+      <div class="lxi"><span class="lxt">Shikko</span><span class="lxd">marche à genoux</span></div>
+      <div class="lxi"><span class="lxt">Juji Garami</span><span class="lxd">projection bras croisés en X</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     2e KYU
+════════════════════════════════════════════ -->
+<div class="kyu-panel" id="p3">
+  <div class="intro-band">
+    <span class="badge badge-2">2e KYU</span>
+    <p>Minimum 7 mois après le 3e kyu · 140h. Suwariwaza sur yokomen uchi (5 principes), hanmi handachi étendu, nouvelles attaques : <strong>jodan tsuki, muna dori, kata dori menuchi complet, juji garami, sumi otoshi, hijikime osae</strong>.</p>
+  </div>
+<div style="display:flex;gap:.5rem;margin-bottom:1rem;justify-content:flex-end;">
+      <button class="toc-expand" onclick="expandAll(2)">▼ Tout ouvrir</button>
+      <button class="toc-expand" onclick="collapseAll(2)">▲ Tout fermer</button>
+    </div>
+
+  <div class="acc-section" id="2-sw-wrap"><div class="acc-header sw open" id="2-sw" onclick="toggleAcc('2-sw')">
+      <span class="acc-pill">座技</span>
+      <div class="acc-title-wrap">
+        <span class="acc-title">Suwariwaza</span>
+        <span class="acc-sub">Yokomen Uchi — 5 principes à genoux</span>
+      </div>
+      <a class="acc-anchor" href="#2-sw" onclick="copyAnchor('2-sw',event)" title="Copier le lien">⚓ #2-sw</a>
+      <span class="acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div>
+<div class="acc-body open" id="2-sw-body">
+    <div class="grid">
+      <div class="card">
+        <div class="card-hd"><div><div class="tname">Yokomen Uchi — Ikkyo → Yonkyo · Kote Gaeshi · Irimi Nage</div><span class="tjp">横面打ち · 座技 — programme complet</span></div><span class="ctype tm">Programme</span></div>
+        <p class="cdesc">En suwariwaza sur attaque yokomen : les <strong>4 premiers principes, kote gaeshi et irimi nage</strong>. Interception de la frappe latérale depuis les genoux — techniquement très exigeant.</p>
+        <div class="vlinks">
+          <a class="vlink" href="https://www.youtube.com/watch?v=H6Fez4hUNeo&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/H6Fez4hUNeo/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Suwari Waza – Yokomen Uchi – Ikkyo, Nikyo, Sankyo (FFAB)</div><div class="vbody-meta"><span class="vbody-src">David Maurel FFAB 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+        </div>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="acc-section" id="2-hh-wrap"><div class="acc-header hh open" id="2-hh" onclick="toggleAcc('2-hh')">
+      <span class="acc-pill">半立技</span>
+      <div class="acc-title-wrap">
+        <span class="acc-title">Hanmi Handachi Waza</span>
+        <span class="acc-sub">Programme étendu</span>
+      </div>
+      <a class="acc-anchor" href="#2-hh" onclick="copyAnchor('2-hh',event)" title="Copier le lien">⚓ #2-hh</a>
+      <span class="acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div>
+<div class="acc-body open" id="2-hh-body">
+    <div class="grid">
+      <div class="card">
+        <div class="card-hd"><div><div class="tname">Ryote Dori — Shiho Nage · Kokyu Nage</div><span class="tjp">両手取り · 半立</span></div><span class="ctype tm">Projections</span></div>
+        <p class="cdesc">Depuis les genoux, uke debout saisit les deux poignets. <strong>Shiho nage</strong> et <strong>kokyu nage</strong> depuis cette position atypique.</p>
+        <div class="vlinks">
+          <a class="vlink" href="https://www.youtube.com/watch?v=xIaRVeaPTGE&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/xIaRVeaPTGE/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Hanmi Handachi – Ikkyo, Irimi Nage, Shiho Nage (FFAB)</div><div class="vbody-meta"><span class="vbody-src">David Maurel – Ligue IDF FFAB 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd"><div><div class="tname">Ushiro Ryokata Dori — Ikkyo · Nikyo · Sankyo · Kokyu Nage</div><span class="tjp">後両肩取り · 半立</span></div><span class="ctype tm">Saisie épaules arrière</span></div>
+        <p class="cdesc">Uke saisit les deux épaules par derrière, tori à genoux. Libérer en <strong>abaissant le centre</strong> et en pivotant. Excellent exercice de stabilité du centre depuis les genoux.</p>
+        <div class="vlinks">
+          <a class="vlink" href="https://www.youtube.com/watch?v=lDWYrUUbSVs&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/lDWYrUUbSVs/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Suwari waza – Ikkyo, Nikyo, Sankyo, Yonkyo, Gokyo</div><div class="vbody-meta"><span class="vbody-src">Marc Bachraty 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+        </div>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="acc-section" id="2-tw-wrap"><div class="acc-header tw open" id="2-tw" onclick="toggleAcc('2-tw')">
+      <span class="acc-pill">立技</span>
+      <div class="acc-title-wrap">
+        <span class="acc-title">Tachiwaza</span>
+        <span class="acc-sub">Nouvelles attaques et techniques</span>
+      </div>
+      <a class="acc-anchor" href="#2-tw" onclick="copyAnchor('2-tw',event)" title="Copier le lien">⚓ #2-tw</a>
+      <span class="acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div>
+<div class="acc-body open" id="2-tw-body">
+    <div class="sub-acc" id="2-tw-gy-wrap"><div class="sub-acc-header open" id="2-tw-gy" onclick="toggleSubAcc('2-tw-gy')">
+      <span class="sub-acc-lbl">Gyaku Hanmi Katate Dori — Saisie du poignet, garde opposée · Programme avancé</span>
+      <a class="sub-acc-anchor" href="#2-tw-gy" onclick="copyAnchor('2-tw-gy',event)" title="Copier le lien">⚓ #2-tw-gy</a>
+      <span class="sub-acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div><div class="sub-acc-body open" id="2-tw-gy-body"><div class="atk-block-inner">
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Sankyo · Yonkyo · Kokyu Nage · Sumi Otoshi · Hijikime Osae</div><span class="tjp">逆半身 — techniques avancées</span></div><span class="ctype tm">Programme</span></div>
+          <p class="cdesc"><strong>Sumi otoshi</strong> : descente sur les genoux + balayage des jambes d'uke vers l'arrière. <strong>Hijikime osae</strong> : arm-lock coude en action inverse, amenant uke au sol par pression sur l'épaule.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=URqzUIgFHTE&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/URqzUIgFHTE/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Sumi otoshi</div><div class="vbody-meta"><span class="vbody-src">YouTube</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="atk-block">
+      <p class="atk-lbl">Jodan Tsuki (coup de poing au visage) · Shomen Uchi (frappe verticale) · Kata Dori Menuchi (saisie épaule + frappe) · Katate Ryote Dori (poignet à deux mains) · Muna Dori (saisie des revers) · Yokomen Uchi (frappe latérale) · Ryote Dori (deux poignets)</p>
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Jodan Tsuki — Ikkyo · Irimi Nage</div><span class="tjp">上段突き</span></div><span class="ctype tm">Coup de poing haut</span></div>
+          <p class="cdesc">Coup de poing au visage. Tori se <strong>décale latéralement</strong> en faisant dévier le poing, contrôle le bras en ikkyo ou entre directement en irimi nage.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=MsoAFo24EJE&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/MsoAFo24EJE/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Irimi Nage, Ikkyo, Kote Gaeshi sur attaque</div><div class="vbody-meta"><span class="vbody-src">Marc Bachraty 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Shomen Uchi — Kaiten Nage · Koshi Nage</div><span class="tjp">正面打ち</span></div><span class="ctype tp">Projections dynamiques</span></div>
+          <p class="cdesc"><strong>Uchi kaiten nage, soto kaiten nage</strong> et <strong>koshi nage</strong> depuis interception shomen. Excellente coordination timing/entrée requise.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=lAO-hJW6EsI&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/lAO-hJW6EsI/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Uchi kaiten nage</div><div class="vbody-meta"><span class="vbody-src">YouTube</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Katate Ryote Dori · Muna Dori — Programme complet</div><span class="tjp">片手両手取り・胸取り</span></div><span class="ctype tm">Programme</span></div>
+          <p class="cdesc"><strong>Katate ryote dori</strong> : shiho nage, udekime nage, kote gaeshi, irimi nage, <strong>juji garami</strong>. <strong>Muna dori</strong> : ikkyo, nikyo, shiho nage. Le juji garami est nouveau à ce grade.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=j88tisxQTE4&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/j88tisxQTE4/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Katate dori / Ryote dori – Kokyu nage</div><div class="vbody-meta"><span class="vbody-src">Marc Bachraty 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div></div>
+
+  <div class="acc-section" id="2-uw-wrap"><div class="acc-header uw open" id="2-uw" onclick="toggleAcc('2-uw')">
+      <span class="acc-pill">後技</span>
+      <div class="acc-title-wrap">
+        <span class="acc-title">Ushiro Waza</span>
+        <span class="acc-sub">Programme enrichi</span>
+      </div>
+      <a class="acc-anchor" href="#2-uw" onclick="copyAnchor('2-uw',event)" title="Copier le lien">⚓ #2-uw</a>
+      <span class="acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div>
+<div class="acc-body open" id="2-uw-body">
+    <div class="grid">
+      <div class="card">
+        <div class="card-hd"><div><div class="tname">Ushiro Ryote Dori — Nikyo · Sankyo · Yonkyo · Shiho Nage</div><span class="tjp">後両手取り</span></div><span class="ctype tm">Programme</span></div>
+        <p class="cdesc">Les deux poignets par derrière. Libérer en allant vers l'avant d'abord, puis pivot et techniques. Ne jamais tirer en arrière.</p>
+        <div class="vlinks">
+          <a class="vlink" href="https://www.youtube.com/watch?v=bDU5bkIlIqs&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/bDU5bkIlIqs/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Gyaku hanmi – Irimi nage (analyse)</div><div class="vbody-meta"><span class="vbody-src">Analyse technique 🇫🇷</span><span class="vbody-badge">✨ 2023</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd"><div><div class="tname">Ushiro Ryokata Dori — Ikkyo · Nikyo · Irimi Nage</div><span class="tjp">後両肩取り</span></div><span class="ctype tm">Programme</span></div>
+        <p class="cdesc">Saisie des deux épaules par derrière. <strong>Faire chuter son centre de gravité</strong> et pivoter rapidement. La libération des épaules crée le déséquilibre d'uke.</p>
+        <div class="vlinks">
+          <a class="vlink" href="https://www.youtube.com/watch?v=fPlArkVBT7k&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/fPlArkVBT7k/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Shomen Uchi Irimi Nage – Seki Shoji Sensei 8e dan</div><div class="vbody-meta"><span class="vbody-src">Séminaire Int. Aikikai</span><span class="vbody-badge">✨ 2026</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+        </div>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="lexique">
+    <h3>Nouvelles techniques du 2e kyu</h3>
+    <div class="lex-grid">
+      <div class="lxi"><span class="lxt">Jodan Tsuki</span><span class="lxd">coup de poing au visage</span></div>
+      <div class="lxi"><span class="lxt">Muna Dori</span><span class="lxd">saisie des revers du keikogi</span></div>
+      <div class="lxi"><span class="lxt">Sumi Otoshi</span><span class="lxd">projection dans le coin + fauchage</span></div>
+      <div class="lxi"><span class="lxt">Hijikime Osae</span><span class="lxd">arm-lock coude en action inverse</span></div>
+      <div class="lxi"><span class="lxt">Juji Garami</span><span class="lxd">projection bras croisés en X</span></div>
+      <div class="lxi"><span class="lxt">Ushiro Ryote Dori</span><span class="lxd">deux poignets par derrière</span></div>
+      <div class="lxi"><span class="lxt">Ushiro Ryokata Dori</span><span class="lxd">deux épaules par derrière</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     1er KYU
+════════════════════════════════════════════ -->
+<div class="kyu-panel" id="p4">
+  <div class="intro-band">
+    <span class="badge badge-1">1er KYU</span>
+    <p>Minimum 8 mois après le 2e kyu · 160h. Dernière étape avant le <strong>Shodan (初段)</strong>. Programme synthétique centré sur la <strong>fluidité, le zanshin et le jyu waza</strong>. La qualité prime sur la quantité.</p>
+  </div>
+<div style="display:flex;gap:.5rem;margin-bottom:1rem;justify-content:flex-end;">
+      <button class="toc-expand" onclick="expandAll(4)">▼ Tout ouvrir</button>
+      <button class="toc-expand" onclick="collapseAll(4)">▲ Tout fermer</button>
+    </div>
+
+  <div class="shodan-box">
+    <span class="kj">初段</span>
+    <p>Ce programme prépare directement au <strong>1er Dan</strong>. L'examinateur évalue autant la présence martiale (zanshin), la fluidité et la compréhension des principes que l'exécution technique.</p>
+  </div>
+<div style="display:flex;gap:.5rem;margin-bottom:1rem;justify-content:flex-end;">
+      <button class="toc-expand" onclick="expandAll(3)">▼ Tout ouvrir</button>
+      <button class="toc-expand" onclick="collapseAll(3)">▲ Tout fermer</button>
+    </div>
+
+  <div class="acc-section" id="1-sw-wrap"><div class="acc-header sw open" id="1-sw" onclick="toggleAcc('1-sw')">
+      <span class="acc-pill">座技</span>
+      <div class="acc-title-wrap">
+        <span class="acc-title">Suwariwaza</span>
+        <span class="acc-sub">Ryote Dori · Ryo Kata Dori</span>
+      </div>
+      <a class="acc-anchor" href="#1-sw" onclick="copyAnchor('1-sw',event)" title="Copier le lien">⚓ #1-sw</a>
+      <span class="acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div>
+<div class="acc-body open" id="1-sw-body">
+    <div class="grid">
+      <div class="card">
+        <div class="card-hd"><div><div class="tname">Ryote Dori — Ikkyo</div><span class="tjp">両手取り · 座技</span></div><span class="ctype ti">Immobilisation</span></div>
+        <p class="cdesc">Double saisie des poignets à genoux. <strong>Coordination précise des hanches</strong> pour lever les deux bras simultanément en cercle. La symétrie du mouvement est la principale difficulté.</p>
+        <div class="vlinks">
+          <a class="vlink" href="https://www.youtube.com/watch?v=0gyGR88BoUc&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/0gyGR88BoUc/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Suwariwaza ryote-dori kokyu ho</div><div class="vbody-meta"><span class="vbody-src">Aikido Virtual Dojo</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd"><div><div class="tname">Ryo Kata Dori — Ikkyo</div><span class="tjp">両肩取り · 座技</span></div><span class="ctype ti">Immobilisation</span></div>
+        <p class="cdesc">Double saisie des épaules à genoux. Lever les deux bras dans un large cercle simultanément. Le <strong>kokyu (souffle unifié)</strong> doit traverser tout le corps pour être efficace depuis les genoux.</p>
+        <div class="vlinks">
+          <a class="vlink" href="https://www.youtube.com/watch?v=lDWYrUUbSVs&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/lDWYrUUbSVs/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Suwari waza – Ikkyo, Nikyo, Sankyo, Yonkyo, Gokyo</div><div class="vbody-meta"><span class="vbody-src">Marc Bachraty 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+        </div>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="acc-section" id="1-hh-wrap"><div class="acc-header hh open" id="1-hh" onclick="toggleAcc('1-hh')">
+      <span class="acc-pill">半立技</span>
+      <div class="acc-title-wrap">
+        <span class="acc-title">Hanmi Handachi Waza</span>
+        <span class="acc-sub">Programme avancé</span>
+      </div>
+      <a class="acc-anchor" href="#1-hh" onclick="copyAnchor('1-hh',event)" title="Copier le lien">⚓ #1-hh</a>
+      <span class="acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div>
+<div class="acc-body open" id="1-hh-body">
+    <div class="grid">
+      <div class="card">
+        <div class="card-hd"><div><div class="tname">Gyaku Hanmi Katate Dori — Kote Gaeshi · Irimi Nage · Kaiten Nage · Sumi Otoshi</div><span class="tjp">逆半身片手取り · 半立</span></div><span class="ctype tm">Programme complet</span></div>
+        <p class="cdesc">Programme hanmi handachi le plus riche : <strong>kote gaeshi, irimi nage, kaiten nage, sumi otoshi</strong>. Exige une maîtrise complète du shikko et la capacité à générer des projections dynamiques depuis les genoux.</p>
+        <div class="vlinks">
+          <a class="vlink" href="https://www.youtube.com/watch?v=xIaRVeaPTGE&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/xIaRVeaPTGE/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Hanmi Handachi – Ikkyo, Irimi Nage, Shiho Nage (FFAB)</div><div class="vbody-meta"><span class="vbody-src">David Maurel – Ligue IDF FFAB 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd"><div><div class="tname">Shomen Uchi — Irimi Nage</div><span class="tjp">正面打ち · 半立</span></div><span class="ctype tp">Projection</span></div>
+        <p class="cdesc">Depuis les genoux, interception de la frappe shomen venant d'uke debout. <strong>Entrée irimi latérale</strong>, bras derrière la nuque et projection.</p>
+        <div class="vlinks">
+          <a class="vlink" href="https://www.youtube.com/watch?v=fPlArkVBT7k&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/fPlArkVBT7k/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Shomen Uchi Irimi Nage – Seki Shoji Sensei 8e dan</div><div class="vbody-meta"><span class="vbody-src">Séminaire Int. Aikikai</span><span class="vbody-badge">✨ 2026</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+        </div>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="acc-section" id="1-tw-wrap"><div class="acc-header tw open" id="1-tw" onclick="toggleAcc('1-tw')">
+      <span class="acc-pill">立技</span>
+      <div class="acc-title-wrap">
+        <span class="acc-title">Tachiwaza</span>
+        <span class="acc-sub">Consolidation + nouvelles attaques</span>
+      </div>
+      <a class="acc-anchor" href="#1-tw" onclick="copyAnchor('1-tw',event)" title="Copier le lien">⚓ #1-tw</a>
+      <span class="acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div>
+<div class="acc-body open" id="1-tw-body">
+    <div class="grid">
+      <div class="card">
+        <div class="card-hd"><div><div class="tname">Ryote Dori · Ryo Kata Dori — Ikkyo</div><span class="tjp">両手取り・両肩取り</span></div><span class="ctype ti">Immobilisations</span></div>
+        <p class="cdesc">Même principe qu'en suwariwaza, debout. La coordination et la symétrie du mouvement restent les points clés.</p>
+        <div class="vlinks">
+          <a class="vlink" href="https://www.youtube.com/watch?v=0gyGR88BoUc&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/0gyGR88BoUc/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Suwariwaza ryote-dori kokyu ho</div><div class="vbody-meta"><span class="vbody-src">Aikido Virtual Dojo</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd"><div><div class="tname">Shomen Uchi — Gokyo · Shiho Nage</div><span class="tjp">正面打ち · 五教・四方投げ</span></div><span class="ctype tm">5e principe</span></div>
+        <p class="cdesc"><strong>Gokyo</strong> : identique à ikkyo ura mais paume d'uke vers le haut (contrôle couteau). <strong>Shiho nage</strong> sur shomen : passage sous le bras après interception.</p>
+        <div class="vlinks">
+          <a class="vlink" href="https://www.youtube.com/watch?v=B8kUTHXCV6Y&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/B8kUTHXCV6Y/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Tanto dori Yokomen Uchi Gokyo – explication du gokyo</div><div class="vbody-meta"><span class="vbody-src">YouTube 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd"><div><div class="tname">Jodan Tsuki — Shiho Nage</div><span class="tjp">上段突き · 四方投げ</span></div><span class="ctype tp">Projection</span></div>
+        <p class="cdesc">Dévier le coup au visage latéralement, <strong>passer sous le bras</strong> et appliquer shiho nage. Le bras du coup devient le bras contrôlé.</p>
+        <div class="vlinks">
+          <a class="vlink" href="https://www.youtube.com/watch?v=MsoAFo24EJE&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/MsoAFo24EJE/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Irimi Nage, Ikkyo, Kote Gaeshi sur attaque</div><div class="vbody-meta"><span class="vbody-src">Marc Bachraty 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd"><div><div class="tname">Maegeri — Irimi Nage</div><span class="tjp">前蹴り · 入身投げ</span></div><span class="ctype tp">Sur coup de pied</span></div>
+        <p class="cdesc">Seule technique sur coup de pied du programme kyu. <strong>Entrée latérale irimi</strong>, laisser passer le pied, puis irimi nage sur la perte d'équilibre d'uke. Ma-aï crucial.</p>
+        <div class="vlinks">
+          <a class="vlink" href="https://www.youtube.com/watch?v=fPlArkVBT7k&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/fPlArkVBT7k/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Shomen Uchi Irimi Nage – Seki Shoji Sensei 8e dan</div><div class="vbody-meta"><span class="vbody-src">Séminaire Int. Aikikai</span><span class="vbody-badge">✨ 2026</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+        </div>
+      </div>
+    </div>
+    <div class="tip"><strong>Priorité 1er kyu</strong> : La <strong>fluidité</strong> et le <strong>zanshin</strong> (vigilance après la technique) sont autant évalués que l'exécution. Rester en garde, regarder autour, ne pas relâcher l'attention après avoir posé uke.</div>
+  </div></div>
+
+  <div class="acc-section" id="1-uw-wrap"><div class="acc-header uw open" id="1-uw" onclick="toggleAcc('1-uw')">
+      <span class="acc-pill">後技</span>
+      <div class="acc-title-wrap">
+        <span class="acc-title">Ushiro Waza</span>
+        <span class="acc-sub">Programme complet · Jyu Waza</span>
+      </div>
+      <a class="acc-anchor" href="#1-uw" onclick="copyAnchor('1-uw',event)" title="Copier le lien">⚓ #1-uw</a>
+      <span class="acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div>
+<div class="acc-body open" id="1-uw-body">
+    <div class="atk-block">
+      <p class="atk-lbl gold-border">Ushiro Ryote Dori — Saisie des deux poignets par derrière · Kokyu Nage · Koshi Nage · Jyu Waza ⭐</p>
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Kokyu Nage · Koshi Nage · Jyu Waza</div><span class="tjp">後両手取り — travail libre</span></div><span class="ctype tj">Libre</span></div>
+          <p class="cdesc">Le <strong>Jyu Waza</strong> (travail libre) signifie que tori choisit librement ses techniques. Il démontre sa capacité à <em>adapter</em> son aikido — signe de vraie compréhension, porte d'entrée vers le Dan.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=bDU5bkIlIqs&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/bDU5bkIlIqs/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Gyaku hanmi – Irimi nage (analyse)</div><div class="vbody-meta"><span class="vbody-src">Analyse technique 🇫🇷</span><span class="vbody-badge">✨ 2023</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sub-acc" id="1-uw-er-wrap"><div class="sub-acc-header open" id="1-uw-er" onclick="toggleSubAcc('1-uw-er')">
+      <span class="sub-acc-lbl">Ushiro Ryo Kata Dori (saisie deux épaules par derrière) · Eri Dori (saisie du col) · Katate Dori Kubishime (poignet + étranglement)</span>
+      <a class="sub-acc-anchor" href="#1-uw-er" onclick="copyAnchor('1-uw-er',event)" title="Copier le lien">⚓ #1-uw-er</a>
+      <span class="sub-acc-chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+    </div><div class="sub-acc-body open" id="1-uw-er-body"><div class="atk-block-inner">
+      <div class="grid">
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Ushiro Ryo Kata Dori</div><span class="tjp">後両肩取り</span></div><span class="ctype tm">Programme</span></div>
+          <p class="cdesc">Deux épaules par derrière. <strong>Sankyo, kote gaeshi, kokyu nage</strong>. La libération des épaules déclenche chaque technique.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=lDWYrUUbSVs&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/lDWYrUUbSVs/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Suwari waza – Ikkyo, Nikyo, Sankyo, Yonkyo, Gokyo</div><div class="vbody-meta"><span class="vbody-src">Marc Bachraty 🇫🇷</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Eri Dori — Ikkyo · Kote Gaeshi · Kokyu Nage</div><span class="tjp">襟取り — saisie du col</span></div><span class="ctype tm">Programme</span></div>
+          <p class="cdesc">Saisie du col par derrière. Abaisser le centre, <strong>saisir le bras d'uke et pivoter</strong>, puis enchaîner. Travaille la conscience de l'espace arrière.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=y47aKlPC22A&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/y47aKlPC22A/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Comment se forme l'irimi nage sur shomen uchi</div><div class="vbody-meta"><span class="vbody-src">Analyse technique 🇫🇷</span><span class="vbody-badge">✨ 2023</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><div><div class="tname">Katate Dori Kubishime — Shiho Nage · Kote Gaeshi · Kokyu Nage</div><span class="tjp">片手取り首絞め</span></div><span class="ctype tm">Programme étendu</span></div>
+          <p class="cdesc">Programme enrichi par rapport au 4e kyu. Les trois techniques doivent résoudre simultanément la saisie du poignet ET l'étranglement.</p>
+          <div class="vlinks">
+            <a class="vlink" href="https://www.youtube.com/watch?v=fPlArkVBT7k&autoplay=1" target="_blank" rel="noopener">
+              <div class="vthumb"><img src="https://img.youtube.com/vi/fPlArkVBT7k/mqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vplay-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+              <div class="vbody"><div class="vbody-title">Shomen Uchi Irimi Nage – Seki Shoji Sensei 8e dan</div><div class="vbody-meta"><span class="vbody-src">Séminaire Int. Aikikai</span><span class="vbody-badge">✨ 2026</span><span class="vbody-arr">↗</span></div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></div></div></div>
+
+  <div class="lexique">
+    <h3>Notions clés du 1er kyu — vers le Shodan</h3>
+    <div class="lex-grid">
+      <div class="lxi"><span class="lxt">Maegeri</span><span class="lxd">coup de pied frontal</span></div>
+      <div class="lxi"><span class="lxt">Gokyo</span><span class="lxd">5e principe — désarmement couteau</span></div>
+      <div class="lxi"><span class="lxt">Eri Dori</span><span class="lxd">saisie du col par derrière</span></div>
+      <div class="lxi"><span class="lxt">Ryo Kata Dori</span><span class="lxd">saisie des deux épaules</span></div>
+      <div class="lxi"><span class="lxt">Jyu Waza</span><span class="lxd">travail libre — choix des techniques</span></div>
+      <div class="lxi"><span class="lxt">Zanshin</span><span class="lxd">vigilance après la technique</span></div>
+      <div class="lxi"><span class="lxt">Shikko</span><span class="lxd">marche à genoux</span></div>
+      <div class="lxi"><span class="lxt">Shodan</span><span class="lxd">1er dan — ceinture noire</span></div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>FFAB · Fédération Française d'Aïkido et de Budo · Aïkikaï de France · Tous grades kyu (5e → 1er) · Septembre 2026</footer>
+
+<script>
+function showKyu(key){
+  const id = 'p' + key;
+  document.querySelectorAll('.kyu-tab').forEach(t=>t.classList.toggle('active',t.dataset.panel===id));
+  document.querySelectorAll('.kyu-panel').forEach(p=>p.classList.toggle('active',p.id===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+
+<script>
+// ── DONNÉES SOMMAIRE ──
+const TOC = [
+  { kyu: '5e Kyu', panel: 0, sections: [
+    { id:'5-sw', label:'Suwariwaza', tag:'座技', sub:[
+      { id:'5-sw-ai', label:'Aï Hanmi Katate Dori' },
+      { id:'5-sw-sh', label:'Shomen Uchi' },
+      { id:'5-sw-ry', label:'Ryote Dori — Kokyu Ho' },
+    ]},
+    { id:'5-tw', label:'Tachiwaza', tag:'立技', sub:[
+      { id:'5-tw-ai', label:'Aï Hanmi Katate Dori' },
+      { id:'5-tw-gy', label:'Gyaku Hanmi — Tenchi Nage' },
+      { id:'5-tw-sh', label:'Shomen Uchi' },
+    ]},
+  ]},
+  { kyu: '4e Kyu', panel: 1, sections: [
+    { id:'4-sw', label:'Suwariwaza', tag:'座技', sub:[
+      { id:'4-sw-ai', label:'Aï Hanmi Katate Dori' },
+      { id:'4-sw-ka', label:'Kata Dori' },
+      { id:'4-sw-sh', label:'Shomen Uchi' },
+    ]},
+    { id:'4-tw', label:'Tachiwaza', tag:'立技', sub:[
+      { id:'4-tw-ai', label:'Aï Hanmi Katate Dori' },
+      { id:'4-tw-gy', label:'Gyaku Hanmi Katate Dori' },
+      { id:'4-tw-mult', label:'Shomen · Kata Dori · Yokomen' },
+    ]},
+    { id:'4-uw', label:'Ushiro Waza', tag:'後技', sub:[
+      { id:'4-uw-ku', label:'Katate Dori Kubishime' },
+    ]},
+  ]},
+  { kyu: '3e Kyu', panel: 2, sections: [
+    { id:'3-hh', label:'Hanmi Handachi', tag:'半立技', sub:[
+      { id:'3-hh-gy', label:'Gyaku Hanmi — Ikkyo · Shiho Nage' },
+    ]},
+    { id:'3-tw', label:'Tachiwaza', tag:'立技', sub:[
+      { id:'3-tw-ry', label:'Ryote Dori' },
+      { id:'3-tw-ch', label:'Chudan Tsuki' },
+      { id:'3-tw-yo', label:'Yokomen Uchi — 5 principes' },
+      { id:'3-tw-ka', label:'Kata Dori Menuchi · Katate Ryote' },
+    ]},
+    { id:'3-uw', label:'Ushiro Waza', tag:'後技', sub:[
+      { id:'3-uw-ry', label:'Ushiro Ryote Dori' },
+    ]},
+  ]},
+  { kyu: '2e Kyu', panel: 3, sections: [
+    { id:'2-sw', label:'Suwariwaza — Yokomen Uchi', tag:'座技', sub:[
+      { id:'2-sw-yo', label:'Yokomen Uchi — 5 principes à genoux' },
+    ]},
+    { id:'2-hh', label:'Hanmi Handachi', tag:'半立技', sub:[
+      { id:'2-hh-ry', label:'Ryote Dori' },
+      { id:'2-hh-ur', label:'Ushiro Ryokata Dori' },
+    ]},
+    { id:'2-tw', label:'Tachiwaza', tag:'立技', sub:[
+      { id:'2-tw-gy', label:'Gyaku Hanmi — Programme avancé' },
+      { id:'2-tw-jo', label:'Jodan Tsuki · Shomen · Muna · Yokomen' },
+    ]},
+    { id:'2-uw', label:'Ushiro Waza', tag:'後技', sub:[
+      { id:'2-uw-ry', label:'Ushiro Ryote Dori' },
+      { id:'2-uw-rk', label:'Ushiro Ryokata Dori' },
+    ]},
+  ]},
+  { kyu: '1er Kyu', panel: 4, sections: [
+    { id:'1-sw', label:'Suwariwaza', tag:'座技', sub:[
+      { id:'1-sw-ry', label:'Ryote Dori · Ryo Kata Dori' },
+    ]},
+    { id:'1-hh', label:'Hanmi Handachi', tag:'半立技', sub:[
+      { id:'1-hh-gy', label:'Gyaku Hanmi — Programme complet' },
+      { id:'1-hh-sh', label:'Shomen Uchi — Irimi Nage' },
+    ]},
+    { id:'1-tw', label:'Tachiwaza', tag:'立技', sub:[
+      { id:'1-tw-ry', label:'Ryote · Ryo Kata Dori' },
+      { id:'1-tw-sh', label:'Shomen Uchi — Gokyo · Shiho Nage' },
+      { id:'1-tw-jo', label:'Jodan Tsuki · Maegeri' },
+    ]},
+    { id:'1-uw', label:'Ushiro Waza', tag:'後技', sub:[
+      { id:'1-uw-ry', label:'Ushiro Ryote Dori — Jyu Waza' },
+      { id:'1-uw-er', label:'Eri Dori · Ryo Kata · Kubishime' },
+    ]},
+  ]},
+];
+
+// ── RENDRE LE SOMMAIRE ──
+function buildTOC() {
+  const toc = document.getElementById('toc');
+  let html = '';
+  TOC.forEach(k => {
+    html += `<div class="toc-kyu"><div class="toc-kyu-title">${k.kyu}</div><div class="toc-links">`;
+    k.sections.forEach(s => {
+      html += `<a class="toc-link" href="#${s.id}" onclick="jumpTo('${s.id}',${k.panel})">${s.label}<span class="toc-tag">${s.tag}</span></a>`;
+      s.sub.forEach(sub => {
+        html += `<a class="toc-link" href="#${sub.id}" onclick="jumpTo('${sub.id}',${k.panel})" style="opacity:.75;font-size:.66rem">↳ ${sub.label}</a>`;
+      });
+    });
+    html += '</div></div>';
+  });
+  toc.innerHTML = html;
+}
+
+// ── NAVIGUER VERS UNE ANCRE ──
+function jumpTo(id, panelIdx) {
+  // Activer l'onglet kyu
+  showKyu(panelIdx);
+  // Ouvrir la section + sous-section
+  setTimeout(() => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    // Ouvrir l'accordéon parent si nécessaire
+    let node = el;
+    while (node) {
+      if (node.classList && node.classList.contains('acc-body')) { node.classList.add('open'); node.previousElementSibling && node.previousElementSibling.classList.add('open'); }
+      if (node.classList && node.classList.contains('sub-acc-body')) { node.classList.add('open'); node.previousElementSibling && node.previousElementSibling.classList.add('open'); }
+      node = node.parentElement;
+    }
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 60);
+}
+
+// ── ACCORDÉON SECTIONS ──
+function toggleAcc(headerId) {
+  const hdr = document.getElementById(headerId);
+  const body = document.getElementById(headerId + '-body');
+  hdr.classList.toggle('open');
+  body.classList.toggle('open');
+  // MAJ URL hash
+  if (hdr.classList.contains('open')) {
+    history.replaceState(null, '', '#' + headerId);
+  }
+}
+
+function toggleSubAcc(headerId) {
+  const hdr = document.getElementById(headerId);
+  const body = document.getElementById(headerId + '-body');
+  hdr.classList.toggle('open');
+  body.classList.toggle('open');
+  if (hdr.classList.contains('open')) {
+    history.replaceState(null, '', '#' + headerId);
+  }
+}
+
+// Tout ouvrir / tout fermer dans un panel
+function expandAll(panelIdx) {
+  const panel = document.getElementById('p' + panelIdx);
+  panel.querySelectorAll('.acc-body,.sub-acc-body').forEach(b => b.classList.add('open'));
+  panel.querySelectorAll('.acc-header,.sub-acc-header').forEach(h => h.classList.add('open'));
+}
+function collapseAll(panelIdx) {
+  const panel = document.getElementById('p' + panelIdx);
+  panel.querySelectorAll('.acc-body,.sub-acc-body').forEach(b => b.classList.remove('open'));
+  panel.querySelectorAll('.acc-header,.sub-acc-header').forEach(h => h.classList.remove('open'));
+}
+
+// ── COPIER L'ANCRE ──
+function copyAnchor(id, e) {
+  e.preventDefault(); e.stopPropagation();
+  const url = location.href.split('#')[0] + '#' + id;
+  navigator.clipboard.writeText(url).then(() => {
+    const a = e.target.closest('.acc-anchor,.sub-acc-anchor');
+    if (a) { const orig = a.textContent; a.textContent = '✓ Copié'; setTimeout(()=>a.textContent=orig,1500); }
+  });
+}
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded', () => {
+  buildTOC();
+  // Ouvrir depuis hash URL
+  const hash = location.hash.slice(1);
+  if (hash) {
+    TOC.forEach(k => {
+      k.sections.forEach(s => {
+        if (s.id === hash) jumpTo(hash, k.panel);
+        s.sub.forEach(sub => { if (sub.id === hash) jumpTo(hash, k.panel); });
+      });
+    });
+  }
+});
+</script>
+
+</body>
+</html>
